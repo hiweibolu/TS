@@ -14,13 +14,13 @@ public:
 		ifstream in(name, ios::in);
 		if (in.is_open()) {
 			in.close();
-			fs.open(name, ios::in | ios::out | ios::binary);
+			fs.open(name, ios::ate | ios::in | ios::out | ios::binary);
 		}
 		else {
 			in.close();
 			ofstream out(name, ios::out);
 			out.close();
-			fs.open(name, ios::in | ios::out | ios::binary);
+			fs.open(name, ios::ate | ios::in | ios::out | ios::binary);
 		}
 
 		if (fs.tellg() == 0) {

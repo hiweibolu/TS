@@ -547,8 +547,10 @@ void query_ticket(const char* ord) {
 	}
 
 	if (ok) {
-		if (sortByTime) sort(tInfo, tInfo + cntInfo, cmp2);
-		else sort(tInfo, tInfo + cntInfo, cmp1);
+		if (cntInfo) {
+			if (sortByTime) sort(tInfo, tInfo + cntInfo, cmp2);
+			else sort(tInfo, tInfo + cntInfo, cmp1);
+		}
 		printf("%d\n", cntInfo);
 		for (int i = 0; i < cntInfo; i++) {
 			printf("%s %s ", tInfo[i].trainID, nameStart);
@@ -603,72 +605,74 @@ void buy_ticket(const char* ord) {
 	word _tnow;
 	if (loginb->search(unowh)) {
 		_tnow = trainb->search(tnowh);
-		trains->get(tnow, _tnow);
-		int x=-1, y=-1;
-		word m = tnow.startTime;
-		for (int k = 0; k < tnow.stationNum - 1; k++) {
-			if (hfrom == myHash(tnow.stations[k])) {
-				x = k;
-				break;
-			}
-			m += tnow.stopoverTimes[k + 1];
-			m += tnow.travelTimes[k];
-		}
-		if (x != -1) {
-			if (tnow.saleDate[0] <= d - m / minutesPerDay && tnow.saleDate[1] >= d - m / minutesPerDay) {
-				_tnow = ttrainb->search(tnowh + ((dword)d - m / minutesPerDay << 32));
-				ttrains->get(tnow, _tnow);
-
-				word seat = -1, time = 0;
-				for (int k = x; k < tnow.stationNum; k++) {
-					if (hto == myHash(tnow.stations[k])) {
-						y = k;
-						break;
-					}
-					seat = min(seat, tnow.seatNum[k]);
-					time += tnow.travelTimes[k];
-					if (k != x) time += tnow.stopoverTimes[k];
+		if (_tnow > 0) {
+			trains->get(tnow, _tnow);
+			int x = -1, y = -1;
+			word m = tnow.startTime;
+			for (int k = 0; k < tnow.stationNum - 1; k++) {
+				if (hfrom == myHash(tnow.stations[k])) {
+					x = k;
+					break;
 				}
-				if (y != -1) {
-					
-					now.price = tnow.prices[y] - tnow.prices[x];
+				m += tnow.stopoverTimes[k + 1];
+				m += tnow.travelTimes[k];
+			}
+			if (x != -1) {
+				if (tnow.saleDate[0] <= d - m / minutesPerDay && tnow.saleDate[1] >= d - m / minutesPerDay) {
+					_tnow = ttrainb->search(tnowh + ((dword)d - m / minutesPerDay << 32));
+					ttrains->get(tnow, _tnow);
 
-					if (buyNum <= seat) {
-						for (int k = x; k < y; k++)tnow.seatNum[k] -= buyNum;
-						ok = 1;
-						sumPrice = 1ull * now.price * buyNum;
-						now.state = 0;
+					word seat = -1, time = 0;
+					for (int k = x; k < tnow.stationNum; k++) {
+						if (hto == myHash(tnow.stations[k])) {
+							y = k;
+							break;
+						}
+						seat = min(seat, tnow.seatNum[k]);
+						time += tnow.travelTimes[k];
+						if (k != x) time += tnow.stopoverTimes[k];
 					}
-					else {
-						if (orderred) {
-							if (buyNum <= tnow.seatNum[tnow.stationNum - 1]) {
-								now.state = 1;
-								ok = 2;
+					if (y != -1) {
+
+						now.price = tnow.prices[y] - tnow.prices[x];
+
+						if (buyNum <= seat) {
+							for (int k = x; k < y; k++)tnow.seatNum[k] -= buyNum;
+							ok = 1;
+							sumPrice = 1ull * now.price * buyNum;
+							now.state = 0;
+						}
+						else {
+							if (orderred) {
+								if (buyNum <= tnow.seatNum[tnow.stationNum - 1]) {
+									now.state = 1;
+									ok = 2;
+								}
 							}
 						}
-					}
 
-					if (ok) {
-						word _unow = userb->search(unowh);
-						users->get(unow, _unow);
-						now.prev = unow.first;
-						now.next = tnow.first;
-						strcpy(now.trainID, tnow.trainID);
-						strcpy(now.from, from);
-						strcpy(now.to, to);
-						now.d = d - m / minutesPerDay;
-						m += (d - m / minutesPerDay) * minutesPerDay;
-						now.leaving_time = m;
-						now.arriving_time = m + time;
-						now.num = buyNum;
-						word _now = orders->put(now);
-						unow.first = _now;
-						unow.orderNum++;
-						users->set(unow, _unow);
-						if (ok == 2) {
-							tnow.first = _now;
+						if (ok) {
+							word _unow = userb->search(unowh);
+							users->get(unow, _unow);
+							now.prev = unow.first;
+							now.next = tnow.first;
+							strcpy(now.trainID, tnow.trainID);
+							strcpy(now.from, from);
+							strcpy(now.to, to);
+							now.d = d - m / minutesPerDay;
+							m += (d - m / minutesPerDay) * minutesPerDay;
+							now.leaving_time = m;
+							now.arriving_time = m + time;
+							now.num = buyNum;
+							word _now = orders->put(now);
+							unow.first = _now;
+							unow.orderNum++;
+							users->set(unow, _unow);
+							if (ok == 2) {
+								tnow.first = _now;
+							}
+							ttrains->set(tnow, _tnow);
 						}
-						ttrains->set(tnow, _tnow);
 					}
 				}
 			}
@@ -1076,8 +1080,8 @@ int main() {
 	if (fs.is_open()) fs >> cnt;
 	else cnt = 0;
 
-	/*freopen("in.txt", "r", stdin);
-	freopen("data.out", "w", stdout);*/
+	freopen("data.in", "r", stdin);
+	freopen("data.out", "w", stdout);
 	/*btree t("test.txt");
 	cout << sizeof node << endl;
 	for (int i = 1; i < 1000; i++) {
@@ -1111,10 +1115,13 @@ int main() {
 		}
 		cnt++;
 		ccnt++;
+		//printf(">%s %d\n", ord, ccnt);
 		explain(ord);
 	}
 	
 	loginb->clean();
+	/*delete loginb;
+	loginb = new btree("loginb.txt");*/
 
 	fs.close();
 	fs.open("cnt.txt", ios::out);
