@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#define RESET_EVERYTIME
+//#define RESET_EVERYTIME
 
 const int M = 127 * 2, LEN = 20000;
 const int minNum = M / 2, maxNum = M - 1;
@@ -1086,8 +1086,8 @@ int main() {
 	else cnt = 0;
 	fs.close();
 
-	freopen("in.txt", "r", stdin);
-	freopen("ans.txt", "w", stdout);
+	/*freopen("in.txt", "r", stdin);
+	freopen("ans.txt", "w", stdout);*/
 	/*btree t("test.txt");
 	cout << sizeof node << endl;
 	for (int i = 1; i < 1000; i++) {
