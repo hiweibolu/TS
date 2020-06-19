@@ -24,7 +24,7 @@ public:
 		}
 
 		if (fs.tellg() == 0) {
-			word len = sizeof word;
+			word len = sizeof (word);
 			fs.write((char*)& len, sizeof len);
 		}
 
@@ -52,7 +52,7 @@ public:
 	
 	bool empty() {
 		fs.seekg(0, ios::end);
-		return fs.tellg() == sizeof word;
+		return fs.tellg() == sizeof (word);
 	}
 	
 };

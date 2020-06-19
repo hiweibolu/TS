@@ -85,7 +85,7 @@ public:
 			fs.open(name, ios::in | ios::out | ios::binary);
 		}
 		if (fs.tellg() == 0){
-			dword len = sizeof dword;
+			dword len = sizeof(dword);
 			fs.write((char*)& len, sizeof len);
 
 			node temp;
