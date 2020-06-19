@@ -1,7 +1,8 @@
+const int maxStation = 50;
 class train {
 public:
-	char trainID[23], stations[100][43];
-	word stationNum, seatNum[103], prices[103], startTime, travelTimes[103], stopoverTimes[103], saleDate[2];
+	char trainID[23], stations[maxStation][43];
+	word stationNum, seatNum[maxStation], prices[maxStation], startTime, travelTimes[maxStation], stopoverTimes[maxStation], saleDate[2];
 	char type;
 	word state,first;
 
