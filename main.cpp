@@ -1,11 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 //#define RESET_EVERYTIME
 
-const int M = 127 * 2, LEN = 20000;
+const int M = 127 * 2, LEN = 40000;
 const int minNum = M / 2, maxNum = M - 1;
 const int maxTrainNumber = 15000;
 const int maxStationNumber = maxTrainNumber * 10;
-typedef unsigned long word;
+typedef unsigned long long word;
 typedef unsigned long long dword;
 const dword INF = -1, mask = (1ull<<32)-1;
 word DAYS[13] = { 0,31,29,31,30,31,30,31,31,30,31,30,31 };
