@@ -84,6 +84,7 @@ public:
 			out.close();
 			fs.open(name, ios::ate | ios::in | ios::out | ios::binary);
 		}
+		fs.seekg(0, ios::end);
 		if (fs.tellg() == 0){
 			dword len = sizeof(dword);
 			fs.write((char*)& len, sizeof len);
@@ -95,6 +96,10 @@ public:
 			fs.write((char*)& temp, sizeof temp);
 
 		}
+	}
+
+	~btree(){
+		fs.close();
 	}
 
 	void clean() {

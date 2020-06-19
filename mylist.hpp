@@ -23,6 +23,7 @@ public:
 			fs.open(name, ios::ate | ios::in | ios::out | ios::binary);
 		}
 
+		fs.seekg(0, ios::end);
 		if (fs.tellg() == 0) {
 			word len = sizeof (word);
 			fs.write((char*)& len, sizeof len);
@@ -33,6 +34,10 @@ public:
 	void clean() {
 		fs.close();
 		fs.open(filename, ios::out);
+	}
+
+	~mylist() {
+		fs.close();
 	}
 
 	template <class T> word put(const T &x) {

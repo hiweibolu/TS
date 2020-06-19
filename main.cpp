@@ -1135,5 +1135,7 @@ int main() {
 	fs.open("cnt.txt", ios::out);
 	fs << cnt;
 
+	fs.close();
+
 	return 0;
 }
