@@ -1074,7 +1074,10 @@ char ord[LEN];
 
 int main() {
 	fstream fs("cnt.txt", ios::in);
-	if (fs.is_open()) fs >> cnt;
+	if (fs.is_open()) {
+		fs.seekg(0, ios::beg);
+		fs >> cnt;
+	}
 	else cnt = 0;
 
 	/*freopen("in.txt", "r", stdin);
@@ -1132,10 +1135,10 @@ int main() {
 	loginb = new btree("loginb.txt");*/
 
 	fs.close();
-	fs.open("cnt.txt", ios::out);
-	fs << cnt;
+	ofstream out("cnt.txt");
+	out << cnt;
 
-	fs.close();
+	out.close();
 
 	return 0;
 }
