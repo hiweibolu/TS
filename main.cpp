@@ -1080,8 +1080,8 @@ int main() {
 	if (fs.is_open()) fs >> cnt;
 	else cnt = 0;
 
-	freopen("5.in", "r", stdin);
-	freopen("5.ans", "w", stdout);
+	/*freopen("5.in", "r", stdin);
+	freopen("5.ans", "w", stdout);*/
 	/*btree t("test.txt");
 	cout << sizeof node << endl;
 	for (int i = 1; i < 1000; i++) {
