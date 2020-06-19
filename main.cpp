@@ -7,7 +7,7 @@ const int maxTrainNumber = 15000;
 const int maxStationNumber = maxTrainNumber * 10;
 typedef unsigned long word;
 typedef unsigned long long dword;
-const dword INF = -1;
+const dword INF = -1, mask = (1ull<<32)-1;
 word DAYS[13] = { 0,31,29,31,30,31,30,31,31,30,31,30,31 };
 
 int cnt = 0, ccnt = 0;
@@ -520,7 +520,7 @@ void query_ticket(const char* ord) {
 			_now = trainb->search(nowh);
 			if (_now == 0) continue;
 			trains->get(now, _now);
-			int x = tStart[i], y = tEnd[j];
+			int x = tStart[i] & mask, y = tEnd[j] & mask;
 			if (x < y && now.state == 1) {
 				word m = now.startTime;
 				for (int k = 0; k < x; k++) {
@@ -862,7 +862,7 @@ void query_transfer(const char* ord) {
 		_now = trainb->search(nowh);
 		if (_now == 0) continue;
 		trains->get(now, _now);
-		for (int j = tStart[i] + 1; j < now.stationNum; j++) {
+		for (int j = (tStart[i] & mask) + 1; j < now.stationNum; j++) {
 			sta[snStart++] = ((dword)myHash(now.stations[j]) << 32) + nowh;
 		}
 	}
@@ -871,7 +871,7 @@ void query_transfer(const char* ord) {
 		_now = trainb->search(nowh);
 		if (_now == 0) continue;
 		trains->get(now, _now);
-		for (int j = 0; j < (int)tEnd[i]; j++) {
+		for (int j = 0; j < (int)(tEnd[i] & mask); j++) {
 			eda[snEnd++] = ((dword)myHash(now.stations[j]) << 32) + nowh;
 		}
 	}
@@ -895,7 +895,7 @@ void query_transfer(const char* ord) {
 			cntInfo = 0;
 			nowh = sta[i] & ((1ull << 32) - 1);
 			_now = trainb->search(nowh);
-			if (_now == 0 || ((word)sta[i]) == ((word)eda[j])) {
+			if (_now == 0 || (sta[i] & mask) == (eda[j] & mask)) {
 				j++;
 				continue;
 			}
