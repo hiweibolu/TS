@@ -1076,8 +1076,8 @@ int main() {
 	if (fs.is_open()) fs >> cnt;
 	else cnt = 0;
 
-	freopen("in.txt", "r", stdin);
-	freopen("data.out", "w", stdout);
+	/*freopen("in.txt", "r", stdin);
+	freopen("data.out", "w", stdout);*/
 	/*btree t("test.txt");
 	cout << sizeof node << endl;
 	for (int i = 1; i < 1000; i++) {
@@ -1107,7 +1107,7 @@ int main() {
 			loginb->clean();
 			delete loginb;
 			loginb = new btree("loginb.txt");
-			//break;
+			break;
 		}
 		cnt++;
 		ccnt++;
