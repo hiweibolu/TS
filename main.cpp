@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-//#define RESET_EVERYTIME
+#define RESET_EVERYTIME
 
 const int M = 127 * 2, LEN = 20000;
 const int minNum = M / 2, maxNum = M - 1;
@@ -881,6 +881,11 @@ void query_transfer(const char* ord) {
 		sort(eda, eda + snEnd);
 	}
 
+	if (ccnt == 5353) {
+		ccnt++;
+		ccnt--;
+	}
+
 	int j = 0;
 	for (int i = 0; i < snStart; i++) {
 		while (j < snEnd && (eda[j] >> 32) < (sta[i] >> 32)) j++;
@@ -888,7 +893,7 @@ void query_transfer(const char* ord) {
 		int _j = j;
 		while ((eda[j] >> 32) == (sta[i] >> 32)) {
 			cntInfo = 0;
-			nowh = sta[i];
+			nowh = sta[i] & ((1ull << 32) - 1);
 			_now = trainb->search(nowh);
 			if (_now == 0 || ((word)sta[i]) == ((word)eda[j])) {
 				j++;
@@ -929,7 +934,7 @@ void query_transfer(const char* ord) {
 					cntInfo++;
 					//==============================================================================================
 					{
-						nowh = eda[j];
+						nowh = (word)eda[j] & ((1ull << 32) - 1);
 						_now = trainb->search(nowh);
 						if (_now == 0) continue;
 						trains->get(now, _now);
@@ -1081,8 +1086,8 @@ int main() {
 	else cnt = 0;
 	fs.close();
 
-	/*freopen("in.txt", "r", stdin);
-	freopen("ans.txt", "w", stdout);*/
+	freopen("in.txt", "r", stdin);
+	freopen("ans.txt", "w", stdout);
 	/*btree t("test.txt");
 	cout << sizeof node << endl;
 	for (int i = 1; i < 1000; i++) {
