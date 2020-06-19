@@ -881,9 +881,6 @@ void query_transfer(const char* ord) {
 		sort(eda, eda + snEnd);
 	}
 
-	if (ccnt == 20389) {
-		ccnt = ccnt;
-	}
 	int j = 0;
 	for (int i = 0; i < snStart; i++) {
 		while (j < snEnd && (eda[j] >> 32) < (sta[i] >> 32)) j++;
@@ -1080,8 +1077,8 @@ int main() {
 	if (fs.is_open()) fs >> cnt;
 	else cnt = 0;
 
-	/*freopen("5.in", "r", stdin);
-	freopen("5.ans", "w", stdout);*/
+	/*freopen("in.txt", "r", stdin);
+	freopen("ans.txt", "w", stdout);*/
 	/*btree t("test.txt");
 	cout << sizeof node << endl;
 	for (int i = 1; i < 1000; i++) {
@@ -1111,7 +1108,9 @@ int main() {
 			loginb->clean();
 			delete loginb;
 			loginb = new btree("loginb.txt");
-			break;
+			#ifndef RESET_EVERYTIME 
+				break;
+			#endif
 		}
 		cnt++;
 		ccnt++;
@@ -1120,6 +1119,15 @@ int main() {
 	}
 	
 	loginb->clean();
+	delete loginb;
+	delete userb;
+	delete users;
+	delete trainb;
+	delete trains;
+	delete stationb;
+	delete orders;
+	delete ttrains;
+	delete ttrainb;
 	/*delete loginb;
 	loginb = new btree("loginb.txt");*/
 
