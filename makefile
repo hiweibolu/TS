@@ -5,5 +5,5 @@ main: btree.hpp \
 		explainer.hpp \
 		train.hpp \
 		order.hpp \
-		main.cpp \
+		main.cpp
 	g++ main.cpp -o code -std=c++11 -O2
