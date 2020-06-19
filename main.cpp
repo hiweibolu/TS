@@ -1108,12 +1108,12 @@ int main() {
 	while (cin.getline(ord, LEN)) {
 		if (strcmp(ord, "exit") == 0) {
 			cout << "bye" << endl;
-			loginb->clean();
-			delete loginb;
-			loginb = new btree("loginb.txt");
 			#ifndef RESET_EVERYTIME 
 				break;
 			#endif
+			loginb->clean();
+			delete loginb;
+			loginb = new btree("loginb.txt");
 		}
 		cnt++;
 		ccnt++;
