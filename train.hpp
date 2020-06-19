@@ -1,7 +1,7 @@
 class train {
 public:
-	char trainID[21], stations[100][41];
-	word stationNum, seatNum[100], prices[100], startTime, travelTimes[100], stopoverTimes[100], saleDate[2];
+	char trainID[23], stations[100][43];
+	word stationNum, seatNum[103], prices[103], startTime, travelTimes[103], stopoverTimes[103], saleDate[2];
 	char type;
 	word state,first;
 

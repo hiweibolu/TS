@@ -1,6 +1,6 @@
 class user {
 public:
-	char username[21], name[21], password[31], mailAddr[31];
+	char username[23], name[23], password[33], mailAddr[33];
 	long privilege;
 	word first, orderNum;
 

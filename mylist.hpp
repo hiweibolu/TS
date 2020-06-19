@@ -1,7 +1,7 @@
 class mylist{
 public:
 	fstream fs;
-	char filename[20];
+	char filename[23];
 
 	mylist(const char* name) {
 		strcpy(filename, name);

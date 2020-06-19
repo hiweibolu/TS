@@ -1,7 +1,7 @@
 class order {
 public:
 	word state;
-	char trainID[21], from[41], to[41];
+	char trainID[23], from[43], to[43];
 	word leaving_time, arriving_time, price, num, d;
 	word next, prev;
 	order() {
