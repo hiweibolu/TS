@@ -4,7 +4,7 @@
 const int M = 127 * 2, LEN = 40000;
 const int minNum = M / 2, maxNum = M - 1;
 const int maxTrainNumber = 15000;
-const int maxStationNumber = maxTrainNumber * 10;
+const int maxStationNumber = maxTrainNumber * 20;
 const int usernameLen = 27;
 const int passwordLen = 37;
 const int nameLen = 27;
