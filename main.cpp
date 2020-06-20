@@ -1088,8 +1088,10 @@ int main() {
 	else cnt = 0;
 	fs.close();*/
 
-	/*freopen("in.txt", "r", stdin);
-	freopen("ans.txt", "w", stdout);*/
+	#ifdef RESET_EVERYTIME
+		freopen("in.txt", "r", stdin);
+		freopen("ans.txt", "w", stdout);
+	#endif 
 	/*btree t("test.txt");
 	cout << sizeof node << endl;
 	for (int i = 1; i < 1000; i++) {
@@ -1113,7 +1115,9 @@ int main() {
 
 	for (int i = 1; i <= 12; i++) DAYS[i] += DAYS[i - 1];
 
-	while (cin.getline(ord, LEN)) {
+	while (1) {
+		while (isspace(cin.peek())) cin.ignore();
+		cin.getline(ord, LEN);
 		if (strcmp(ord, "exit") == 0) {
 			printf("bye\n");
 			#ifndef RESET_EVERYTIME 
