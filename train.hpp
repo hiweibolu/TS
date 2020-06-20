@@ -1,4 +1,4 @@
-const int maxStation = 100;
+
 class train {
 public:
 	char trainID[27], stations[maxStation][47];

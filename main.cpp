@@ -5,7 +5,14 @@ const int M = 127 * 2, LEN = 40000;
 const int minNum = M / 2, maxNum = M - 1;
 const int maxTrainNumber = 15000;
 const int maxStationNumber = maxTrainNumber * 10;
-typedef unsigned long long word;
+const int usernameLen = 27;
+const int passwordLen = 37;
+const int nameLen = 27;
+const int mailAddrLen = 37;
+const int stationsLen = 47;
+const int maxStation = 100;
+const int trainIDLen = 27;
+typedef unsigned long word;
 typedef unsigned long long dword;
 const dword INF = -1, mask = (1ull<<32)-1;
 word DAYS[13] = { 0,31,29,31,30,31,30,31,31,30,31,30,31 };
@@ -123,7 +130,7 @@ void login(const char * ord) {
 	bool ok = false;
 	user now;
 	word nowh;
-	char pw[31];
+	char pw[passwordLen];
 
 	epl.init(ord);
 	while (epl.next()) {
@@ -466,7 +473,7 @@ void delete_train(const char* ord) {
 
 struct trainInfo {
 	word start, price, seat, time;
-	char trainID[21];
+	char trainID[trainIDLen];
 }*tInfo;
 bool cmp1(const trainInfo& a, const trainInfo& b) {
 	return a.price < b.price || a.price == b.price && strcmp(a.trainID, b.trainID) < 0;
@@ -482,7 +489,7 @@ void query_ticket(const char* ord) {
 	word nowh, _now;
 	word sth, edh, d, _st, _ed;
 	bool sortByTime = true;
-	char nameStart[41], nameEnd[41];
+	char nameStart[stationsLen], nameEnd[stationsLen];
 	tInfo = new trainInfo[maxTrainNumber];
 
 	int cntInfo = 0, cntStart = 0, cntEnd = 0;
@@ -571,7 +578,7 @@ void buy_ticket(const char* ord) {
 	order now;
 	word unowh, tnowh, d, buyNum, hfrom, hto;
 	dword sumPrice;
-	char from[41], to[41];
+	char from[stationsLen], to[stationsLen];
 	bool orderred = false;
 
 	epl.init(ord);
@@ -831,7 +838,7 @@ void query_transfer(const char* ord) {
 	word nowh, _now;
 	word sth, edh, d, _st, _ed;
 	bool sortByTime = true;
-	char nameStart[41], nameEnd[41], nameMid[41], namemid[41];
+	char nameStart[stationsLen], nameEnd[stationsLen], nameMid[stationsLen], namemid[stationsLen];
 	tInfo = new trainInfo[4];
 
 	int cntInfo = 0, cntStart = 0, cntEnd = 0, snStart = 0, snEnd = 0;
