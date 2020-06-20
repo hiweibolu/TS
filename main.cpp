@@ -10,7 +10,7 @@ const int passwordLen = 37;
 const int nameLen = 27;
 const int mailAddrLen = 37;
 const int stationsLen = 47;
-const int maxStation = 100;
+const int maxStation = 103;
 const int trainIDLen = 27;
 typedef unsigned long word;
 typedef unsigned long long dword;
