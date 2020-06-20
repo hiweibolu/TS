@@ -17,7 +17,7 @@ typedef unsigned long long dword;
 const dword INF = -1, mask = (1ull<<32)-1;
 word DAYS[13] = { 0,31,29,31,30,31,30,31,31,30,31,30,31 };
 
-int cnt = 0, ccnt = 0;
+//int cnt = 0, ccnt = 0;
 
 #include<cstring>
 #include<iostream>
@@ -356,7 +356,7 @@ void add_train(const char* ord) {
 
 		for (int i = 0; i < now.stationNum; i++) {
 			word tmph = myHash(now.stations[i]);
-			stationb->insert(((dword)tmph << 32) + cnt, ((dword)nowh << 32ull) + i);
+			stationb->insert(((dword)tmph << 32) + nowh, ((dword)nowh << 32ull) + i);
 		}
 
 		printf("0\n");
@@ -888,11 +888,6 @@ void query_transfer(const char* ord) {
 		sort(eda, eda + snEnd);
 	}
 
-	if (ccnt == 5353) {
-		ccnt++;
-		ccnt--;
-	}
-
 	int j = 0;
 	for (int i = 0; i < snStart; i++) {
 		while (j < snEnd && (eda[j] >> 32) < (sta[i] >> 32)) j++;
@@ -1085,13 +1080,13 @@ void explain(const char* ord) {
 char ord[LEN];
 
 int main() {
-	ifstream fs("cnt.txt");
+	/*ifstream fs("cnt.txt");
 	if (fs.is_open()) {
 		fs.seekg(0, ios::beg);
 		fs >> cnt;
 	}
 	else cnt = 0;
-	fs.close();
+	fs.close();*/
 
 	/*freopen("in.txt", "r", stdin);
 	freopen("ans.txt", "w", stdout);*/
@@ -1128,8 +1123,8 @@ int main() {
 			delete loginb;
 			loginb = new btree("loginb.txt");
 		}
-		cnt++;
-		ccnt++;
+		/*cnt++;
+		ccnt++;*/
 		///printf(">%s %d\n", ord, ccnt);
 		explain(ord);
 	}
@@ -1147,10 +1142,10 @@ int main() {
 	/*delete loginb;
 	loginb = new btree("loginb.txt");*/
 
-	ofstream out("cnt.txt");
+	/*ofstream out("cnt.txt");
 	out << cnt;
 
-	out.close();
+	out.close();*/
 
 	return 0;
 }
