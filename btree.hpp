@@ -1,6 +1,6 @@
 class node {
 public:
-	dword key[M], num, isLeaf, next, son[M] ;
+	dword key[M + 3], num, isLeaf, next, son[M + 3] ;
 
 	node() {
 		memset(son, 0, sizeof son);
