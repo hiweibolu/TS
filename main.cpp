@@ -4,7 +4,7 @@
 const int M = 127 * 2, LEN = 40000;
 const int minNum = M / 2, maxNum = M - 1;
 const int maxTrainNumber = 15000;
-const int maxStationNumber = maxTrainNumber * 20;
+const int maxStationNumber = maxTrainNumber * 100;
 const int usernameLen = 27;
 const int passwordLen = 37;
 const int nameLen = 27;
@@ -17,7 +17,7 @@ typedef unsigned long long dword;
 const dword INF = -1, mask = (1ull<<32)-1;
 word DAYS[13] = { 0,31,29,31,30,31,30,31,31,30,31,30,31 };
 
-//int cnt = 0, ccnt = 0;
+int cnt = 0, ccnt = 0;
 
 #include<cstring>
 #include<iostream>
@@ -465,7 +465,14 @@ void delete_train(const char* ord) {
 	}
 
 	if (ok) {
-		trainb->insert(nowh, 0);
+		trainb->insert(nowh, 0); 
+		for (int i = now.saleDate[0]; i <= now.saleDate[1]; i++) {
+			ttrainb->insert(nowh + ((dword)i << 32), 0);
+		}
+		for (int i = 0; i < now.stationNum; i++) {
+			word tmph = myHash(now.stations[i]);
+			stationb->insert(((dword)tmph << 32) + nowh, 0);
+		}
 		printf("0\n");
 	}
 	else printf("-1\n");
@@ -780,10 +787,13 @@ void refund_ticket(const char* ord) {
 		}
 	}
 
+	/*if (cnt == 5902) {
+		cnt = cnt;
+	}*/
 	if (loginb->search(nowh)) {
 		users->get(now, userb->search(nowh));
 		if (now.orderNum >= id) {
-			ok = true;
+			ok = false;
 			order onow;
 			int i = 0;
 			for (word pos = now.first; pos; pos = onow.prev) {
@@ -1127,8 +1137,8 @@ int main() {
 			delete loginb;
 			loginb = new btree("loginb.txt");
 		}
-		/*cnt++;
-		ccnt++;*/
+		cnt++;
+		ccnt++;
 		///printf(">%s %d\n", ord, ccnt);
 		explain(ord);
 	}
