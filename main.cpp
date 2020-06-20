@@ -249,7 +249,7 @@ void modify_profile(const char * ord) {
 		if (_now > 0) {
 			users->get(now, _now);
 			if (cur.privilege > now.privilege || curh == nowh) {
-				if (tmp.privilege == -1 || cur.privilege > tmp.privilege || cur.privilege == tmp.privilege && curh == nowh) {
+				if (tmp.privilege == -1 || cur.privilege > tmp.privilege/* || cur.privilege == tmp.privilege && curh == nowh*/) {
 					if (tmp.password[0]) strcpy(now.password, tmp.password);
 					if (tmp.name[0]) strcpy(now.name, tmp.name);
 					if (tmp.mailAddr[0]) strcpy(now.mailAddr, tmp.mailAddr);
