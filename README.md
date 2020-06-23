@@ -10,7 +10,7 @@
 
 ### **b+树**
 
-用于快速检索符合条件的信息，key值与value值一一对应。
+用于快速检索符合条件的信息。
 
 支持的操作有：
 
@@ -79,11 +79,11 @@
 实现添加用户(add_user)，登录(login)，登出(logout)，查询用户信息(query_profile)，修改用户信息(modify_profile)命令。
 
 使用列表：
- - "users.txt" 以类型user来存储用户的数据。
+ - `users.txt` 以类型user来存储用户的数据。
 
 使用b+树：
- - "userb.txt" 以用户username的哈希值为key值，value值为用户在"users.txt"存储数据的索引。
- - "loginb.txt" 以用户username的哈希值为key值，value值为用户是否登录，1为是，0为否。
+ - `userb.txt` 以用户username的哈希值为key值，value值为用户在`users.txt`存储数据的索引。
+ - `loginb.txt` 以用户username的哈希值为key值，value值为用户是否登录，1为是，0为否。
 
 相关类：<a href='#user'>user</a>.
 
@@ -96,13 +96,13 @@
 实现添加车次(add_train)，发布车次(release_train)，查询车次信息(query_train)，删除(delete_train)，查询车票(query_ticket)，查询换乘(query_transfer)命令。
 
 使用列表：
- - "trains.txt" 以类型train来存储车次的数据。
- - "ttrains.txt" 以类型train来存储某天车次的数据。
+ - `trains.txt` 以类型train来存储车次的数据。
+ - `ttrains.txt` 以类型train来存储某天车次的数据。
 
 使用b+树：
- - "trainb.txt" 以车次trainID的哈希值为key值，value值为车次在"trains.txt"存储数据的索引。
- - "ttrainb.txt" 以车次日期+车次trainID的哈希值为组合key值，value值为这天车次在"ttrains.txt"存储数据的索引。
- - "stationb.txt" 以车站名字的哈希值为key值，value值为经过此车站的车次trainID哈希值。
+ - `trainb.txt` 以车次trainID的哈希值为key值，value值为车次在`trains.txt`存储数据的索引。
+ - `ttrainb.txt` 以车次日期+车次trainID的哈希值为组合key值，value值为这天车次在`ttrains.txt`存储数据的索引。
+ - `stationb.txt` 以车站名字的哈希值为key值，value值为经过此车站的车次trainID哈希值。
 
 相关类：<a href='#train'>train</a>.
 
@@ -116,7 +116,7 @@
 实现购票(buy_ticket)，查询用户订单(query_order)，退票(refund_ticket)命令。
 
 使用列表：
- - "orders.txt" 以类型order来存储订单的数据。
+ - `orders.txt` 以类型order来存储订单的数据。
 
 相关类：<a href='#order'>order</a>.
 
