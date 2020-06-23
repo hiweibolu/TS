@@ -22,7 +22,7 @@
 
  - **清空**。
 
-相关类：node, btree.
+相关类：<a href='#node'>node</a>, <a href='#btree'>btree</a>.
 
 ### **列表**
 
@@ -38,7 +38,7 @@
 
  - **清空**。
 
-相关类：mylist.
+相关类：<a href='#mylist'>mylist</a>.
 
 
 ## **命令输入模块**
@@ -55,7 +55,7 @@
 
 对于输入的命令字符串，分解成可供程序识别。
 
-相关类：explainer.
+相关类：<a href='#explainer'>explainer</a>.
 
 ### **时间系统**
 
@@ -74,11 +74,56 @@
 
 ## **用户管理模块**
 
-## **列车管理模块**
+管理用户信息，管理用户登录状态。
+
+实现添加用户(add_user)，登录(login)，登出(logout)，查询用户信息(query_profile)，修改用户信息(modify_profile)命令。
+
+使用列表：
+ - "users.txt" 以类型user来存储用户的数据。
+
+使用b+树：
+ - "userb.txt" 以用户username的哈希值为key值，value值为用户在"users.txt"存储数据的索引。
+ - "loginb.txt" 以用户username的哈希值为key值，value值为用户是否登录，1为是，0为否。
+
+相关类：<a href='#user'>user</a>.
+
+相关函数：<a href='#add_user'>add_user</a>, <a href='#login'>login</a>, <a href='#logout'>logout</a>, <a href='#query_profile'>query_profile</a>, <a href='#modify_profile'>modify_profile</a>.
+
+## **车次管理模块**
+
+管理车次信息，并能对其有一定的查询功能。
+
+实现添加车次(add_train)，发布车次(release_train)，查询车次信息(query_train)，删除(delete_train)，查询车票(query_ticket)，查询换乘(query_transfer)命令。
+
+使用列表：
+ - "trains.txt" 以类型train来存储车次的数据。
+ - "ttrains.txt" 以类型train来存储某天车次的数据。
+
+使用b+树：
+ - "trainb.txt" 以车次trainID的哈希值为key值，value值为车次在"trains.txt"存储数据的索引。
+ - "ttrainb.txt" 以车次日期+车次trainID的哈希值为组合key值，value值为这天车次在"ttrains.txt"存储数据的索引。
+ - "stationb.txt" 以车站名字的哈希值为key值，value值为经过此车站的车次trainID哈希值。
+
+相关类：<a href='#train'>train</a>.
+
+相关函数：<a href='#add_train'>add_train</a>, <a href='#release_train'>release_train</a>, <a href='#query_train'>query_train</a>, <a href='#delete_train'>delete_train</a>, <a href='#query_ticket'>query_ticket</a>, <a href='#query_transfer'>query_transfer</a>.
+
 
 ## **订单管理模块**
 
-## **类和函数**
+管理订单信息，实现候补购票，退票功能，并且在退票后检测并尝试完成候补订单。
+
+实现购票(buy_ticket)，查询用户订单(query_order)，退票(refund_ticket)命令。
+
+使用列表：
+ - "orders.txt" 以类型order来存储订单的数据。
+
+相关类：<a href='#order'>order</a>.
+
+相关函数：<a href='#buy_ticket'>buy_ticket</a>, <a href='#query_order'>query_order</a>, <a href='#refund_ticket'>refund_ticket</a>.
+
+
+## **Reference**
 
 ### **约定**
 
@@ -90,6 +135,25 @@ typedef unsigned long long dword;
 
 
 ### **类**
+
+#### <a name='node'>**node**</a>
+
+##### 成员变量
+
+##### 成员函数
+
+#### <a name='btree'>**btree**</a>
+
+#### <a name='mylist'>**mylist**</a>
+
+#### <a name='explainer'>**explainer**</a>
+
+#### <a name='user'>**user**</a>
+
+#### <a name='train'>**train**</a>
+
+#### <a name='order'>**order**</a>
+
 ### **函数**
 #### <a name='date2day'>**date2day**</a>
 
@@ -131,3 +195,29 @@ word myHash(const char *str);
 为了防止冲突，在计算时将长整型划分为两个短整型分别同时计算。
 
 最后将两个短整型再合并成长整型。
+
+#### <a name='add_user'>**add_user**</a>
+
+#### <a name='login'>**login**</a>
+
+#### <a name='logout'>**logout**</a>
+
+#### <a name='query_profile'>**query_profile**</a>
+
+#### <a name='modify_profile'>**modify_profile**</a>
+
+#### <a name='add_train'>**add_train**</a>
+
+#### <a name='release_train'>**release_train**</a>
+
+#### <a name='query_train'>**query_train**</a>
+
+#### <a name='delete_train'>**delete_train**</a>
+
+#### <a name='query_ticket'>**query_ticket**</a>
+
+#### <a name='query_transfer'>**query_transfer**</a>
+
+#### <a name='query_order'>**query_order**</a>
+
+#### <a name='refund_ticket'>**refund_ticket**</a>
