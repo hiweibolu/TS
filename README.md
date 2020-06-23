@@ -142,17 +142,31 @@ typedef unsigned long long dword;
 
 ##### 成员函数
 
+* * *
+
 #### <a name='btree'>**btree**</a>
+
+* * *
 
 #### <a name='mylist'>**mylist**</a>
 
+* * *
+
 #### <a name='explainer'>**explainer**</a>
+
+* * *
 
 #### <a name='user'>**user**</a>
 
+* * *
+
 #### <a name='train'>**train**</a>
 
+* * *
+
 #### <a name='order'>**order**</a>
+
+* * *
 
 ### **函数**
 #### <a name='date2day'>**date2day**</a>
@@ -165,6 +179,8 @@ word date2day(const char* s);
 
 具体数值为1月1日到这个日期所经过的天数乘。
 
+* * *
+
 
 #### <a name='date2minute'>**date2minute**</a>
 
@@ -176,6 +192,8 @@ word date2minute(const char* s);
 
 具体数值为1月1日到这个日期所经过的天数乘以每天的分钟数。
 
+* * *
+
 #### <a name='printTime'>**printTime**</a>
 
 ```
@@ -183,6 +201,8 @@ void printTime(word x);
 ```
 
 将无符号长整型的分钟数，输出为"xx-xx xx:xx"格式的日期+时间。
+
+* * *
 
 #### <a name='myHash'>**myHash**</a>
 
@@ -196,28 +216,56 @@ word myHash(const char *str);
 
 最后将两个短整型再合并成长整型。
 
+* * *
+
 #### <a name='add_user'>**add_user**</a>
+
+* * *
 
 #### <a name='login'>**login**</a>
 
+* * *
+
 #### <a name='logout'>**logout**</a>
+
+* * *
 
 #### <a name='query_profile'>**query_profile**</a>
 
+* * *
+
 #### <a name='modify_profile'>**modify_profile**</a>
+
+* * *
 
 #### <a name='add_train'>**add_train**</a>
 
+* * *
+
 #### <a name='release_train'>**release_train**</a>
+
+* * *
 
 #### <a name='query_train'>**query_train**</a>
 
+* * *
+
 #### <a name='delete_train'>**delete_train**</a>
+
+* * *
 
 #### <a name='query_ticket'>**query_ticket**</a>
 
+* * *
+
 #### <a name='query_transfer'>**query_transfer**</a>
+
+* * *
 
 #### <a name='query_order'>**query_order**</a>
 
+* * *
+
 #### <a name='refund_ticket'>**refund_ticket**</a>
+
+* * *
